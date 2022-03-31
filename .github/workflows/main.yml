@@ -1,18 +1,17 @@
-name: first demo 
+name: Upload Website
+
 on:
- push:
-  branches: 
-  - main 
+  push:
+    branches:
+    - main
+
 jobs:
-  demo_job:
-   runs-on: self-hosted
-   steps:
-    - uses: actions/checkout@v3
-    - name: run a one-line script
-      run: sh ./new.sh
-    - name: run multiple-line script
-      run: | 
-          echo Nothing to show here..
-          echo what is in that folder?
-          ls -a
-   
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@main
+    - run: |
+           aws s3 ls
+           ls
+           pwd
+           aws s3 cp index.html s3://fproductionbucket 
